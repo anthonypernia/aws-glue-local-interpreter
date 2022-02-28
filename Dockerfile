@@ -6,7 +6,11 @@ WORKDIR /root/
 ENV TZ=America/Argentina/Buenos_Aires
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ##install python and pip
-RUN apt-get update && apt-get install -y python3-pip && apt-get install -y python3-dev && apt-get install -y python3-venv && apt-get install -y python3-setuptools
+RUN apt-get update 
+RUN apt-get install -y python3-pip 
+RUN apt-get install -y python3-dev 
+RUN apt-get install -y python3-venv
+RUN apt-get install -y python3-setuptools
 ## install dependencies , git , zip, wget, java , jdk, jre
 RUN apt-get install -y git
 RUN apt-get install -y zip
