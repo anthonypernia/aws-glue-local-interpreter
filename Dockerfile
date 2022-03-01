@@ -1,6 +1,6 @@
 ### Anthony Pernia @anthonyperniah
 ##from ubuntu
-FROM ubuntu:18.04
+FROM ubuntu:latest
 WORKDIR /root/
 ##setting the localzone
 ENV TZ=America/Argentina/Buenos_Aires
