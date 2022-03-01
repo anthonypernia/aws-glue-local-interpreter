@@ -50,7 +50,7 @@ RUN cd /root/aws-glue-libs/ && zip -r awsglue.zip awsglue
 ENV PYTHONPATH=/root/aws-glue-libs/awsglue.zip:/root/spark-3.1.1-amzn-0-bin-3.2.1-amzn-3/python/lib/pyspark.zip:/root/spark-3.1.1-amzn-0-bin-3.2.1-amzn-3/python/lib/py4j-0.10.9-src.zip:/root/spark-3.1.1-amzn-0-bin-3.2.1-amzn-3/python
 ### moving jars to spark
 RUN cp /root/aws-glue-libs/jarsv1/* /root/spark-3.1.1-amzn-0-bin-3.2.1-amzn-3/jars/
-###solving compatibility problem with jars
+###########solving compatibility problem with jars
 RUN cd /root/spark-3.1.1-amzn-0-bin-3.2.1-amzn-3/jars/ && wget https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.2.0/hadoop-aws-3.2.0.jar
 RUN rm -rf /root/aws-glue-libs
 ### requirements
