@@ -1,19 +1,29 @@
-## Contenedor para desarrollo local con AWS GLUE
+## Local Docker container to develop on AWS glue
 
-Contenedor que emula el interprete de spark de **AWS Glue**, contiene todas las librerias y ademas permite conexion con todos los otros servicios, como S3 o tablas del Glue catalog.
+With this container, you can run Python code and use **AWS Glue** context and AWS libraries. 
+For example: 
+* Create DynamicFrame
+* Read and write in S3
+* Read tables in Athena
+* Etc.
 
-- En DockerHub: ***anthonyperniah/aws-glue-local-interpreter***
+ Docker image in DockerHub: [anthonyperniah/aws-glue-local-interpreter](https://hub.docker.com/r/anthonyperniah/aws-glue-local-interpreter)
 
 
-#### Requisitos:
+#### Requirements:
 
-Para usar las credenciales de AWS, es necesario tenerlas alojadas en la ruta :
+- Aws-cli
+  - MacOS : ```brew install awscli```
+  - Ubuntu : ```sudo apt-get install awscli```
+  - Windows : [AWS docs](https://docs.aws.amazon.com/es_es/cli/latest/userguide/install-cliv2-windows.html)
+- You must have AWS credentials in the path: **~/.aws**
 
-- **~/.aws**
 
-En esa ruta deberia existir dos archivos, uno con nombre ***config*** y otro con nombre ***credentials***
+Must be two files:
+* ***config*** 
+* ***credentials***
 
-*Ejemplos*:
+*Examples*:
 
 **config**
 ```bash
@@ -26,64 +36,63 @@ output = json
 aws_access_key_id = XXXXXXXXXXXXXXXXXXXXXXXX
 aws_secret_access_key = XXXXXXXXXXXXXXXXXXXXXXXX
 ```
-Para verificar que se accede a AWS, se puede ejecutar el comando:
-(Teniendo el cli de aws instalado):
+To check access to S3:
 ````
 aws s3 ls
 ````
-Deberia tener la respuesta con todos los buckets en S3.
 
-Luego de esa verificacion, para usar el contenedor, puede ser de dos formas:
-- Ejecucion directa por bash
-- Usando **docker-compose**
+You should get a list of buckets in S3.
+
+How to use:
+- By bash command
+- Using **docker-compose**
 
 
-### Mediante ejecucion directa por bash
-
-*(Las imagenes estan en el DockerHub)*
+***Both using [anthonyperniah/aws-glue-local-interpreter](https://hub.docker.com/r/anthonyperniah/aws-glue-local-interpreter)***
+#### - Bash command
 
 ````sh
 docker run  -p 8888:8888 -v ~/.aws:/root/.aws --name aws-glue-local-interpreter  anthonyperniah/aws-glue-local-interpreter
 ````
 
-Esto creara el contenedor, lo llamara **aws-glue-local-interpreter** y creara un volumen para compartir la ruta ***~/.aws*** en la ruta ***/root/.aws*** del usuario ***root***, lo cual permitira usar las mismas credenciales.
+Will create the container **aws-glue-local-interpreter** and create a volume to share path **~/.aws** in **/root/.aws** to use the same credentials
 
-### Mediante docker compose
-Dentro del repo esta el archivo para usar con docker compose:
+### - Docker-compose
 
-*(Se puede ejecutar con la imagen que esta en DockerHub o con el archivo Dockerfile que esta en el repositorio)*
+Must have a file name:
+* **docker-compose.yml**
+
+With this content:
 ````yml
 version: '3'
 
 services:
   aws-glue-local-interpreter:
-    ##build:
-    ##  context: .
-    ##  dockerfile: Dockerfile
     image: "anthonyperniah/aws-glue-local-interpreter:latest"
     volumes:
       - ~/.aws:/root/.aws
     ports:
       - "8888:8888"
 ````
-El comando para crear el contenedor con el docker-compose es:
+Then use:
 ````bash
-docker-compose up --build
+docker-compose up
 ````
-Ademas de esto se puede agregar otro volumen donde se almacenaran y editaran los scripts en local y se pueden ejecutar en el contenedor.
+You can add another volume where the script will be stored and edited locally and executed in the container.
 
-Cuando el contenedor este corriendo, se dirige a la ruta:
+When the container is running, go to :
 - localhost:8888
-Ó si esta en un servidor local remoto:
-- {serveIP}:8888
+or
+- **{serverIP}**:8888
 
-Crear un notebook nuevo y ejecutar el siguiente comando:
+#### Accessing s3
+Create a notebook and run the code:
 ```python
 from pyspark import SparkContext
 from awsglue.context import GlueContext
-
+###Creating a glue context
 glueContext = GlueContext(SparkContext.getOrCreate()) 
-
+### Read s3 and create dynamic frame
 inputDF = glueContext.create_dynamic_frame_from_options(connection_type = "s3", connection_options = {"paths": ["s3://awsglue-datasets/examples/us-legislators/all/memberships.json"]}, format = "json")
 inputDF.toDF().show()
 ```
