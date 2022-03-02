@@ -1,4 +1,4 @@
-## Local Docker container to develop on AWS glue
+## Local Docker container to develop in AWS glue
 
 With this container, you can run Python code and use **AWS Glue** context and AWS libraries. 
 For example: 
