@@ -68,9 +68,10 @@ version: '3'
 
 services:
   aws-glue-local-interpreter:
-    image: "anthonyperniah/aws-glue-local-interpreter:latest"
+    image: "anthonyperniah/aws-glue-local-interpreter"
     volumes:
       - ~/.aws:/root/.aws
+      - ~/aws-glue-developments:/root/developments ##(OPTIONAL)
     ports:
       - "8888:8888"
 ````
@@ -78,7 +79,7 @@ Then use:
 ````bash
 docker-compose up
 ````
-You can add another volume where the script will be stored and edited locally and executed in the container.
+You can add another volume where the script will be stored and edited locally and executed in the container. in this case, it is used "aws-glue-developments" folder.
 
 When the container is running, go to :
 - localhost:8888
@@ -96,3 +97,9 @@ glueContext = GlueContext(SparkContext.getOrCreate())
 inputDF = glueContext.create_dynamic_frame_from_options(connection_type = "s3", connection_options = {"paths": ["s3://awsglue-datasets/examples/us-legislators/all/memberships.json"]}, format = "json")
 inputDF.toDF().show()
 ```
+
+
+
+Tested in architectures:
+- AMD64
+- ARM64v8

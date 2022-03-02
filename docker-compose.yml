@@ -2,12 +2,9 @@ version: '3'
 
 services:
   aws-glue-local-interpreter:
-    ##build:
-    ##  context: .
-    ##  dockerfile: Dockerfile
-    image: "anthonyperniah/aws-glue-local-interpreter:latest"
+    image: "anthonyperniah/aws-glue-local-interpreter"
     volumes:
       - ~/.aws:/root/.aws
-      - ~/aws-glue-developments:/root/developments
+      - ~/aws-glue-developments:/root/developments ##(OPTIONAL)
     ports:
       - "8888:8888"
