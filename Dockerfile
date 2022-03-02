@@ -52,6 +52,7 @@ ENV PYTHONPATH=/root/aws-glue-libs/awsglue.zip:/root/spark-3.1.1-amzn-0-bin-3.2.
 RUN cp /root/aws-glue-libs/jarsv1/* /root/spark-3.1.1-amzn-0-bin-3.2.1-amzn-3/jars/
 ###########solving compatibility problem with jars
 RUN cd /root/spark-3.1.1-amzn-0-bin-3.2.1-amzn-3/jars/ && wget https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.2.0/hadoop-aws-3.2.0.jar
+
 ### requirements
 COPY requirements.txt /root/requirements.txt
 RUN pip3 install -r /root/requirements.txt
