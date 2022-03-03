@@ -30,3 +30,4 @@ datetime
 python-telegram-bot
 schedule
 apscheduler
+lxml
