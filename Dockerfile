@@ -5,6 +5,9 @@ WORKDIR /root/
 ##setting the localzone
 ENV TZ=America/Argentina/Buenos_Aires
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN ln -s /usr/bin/dpkg-split /usr/sbin/dpkg-split
+RUN ln -s /usr/bin/dpkg-deb /usr/sbin/dpkg-deb
+RUN ln -s /bin/tar /usr/sbin/tar
 ##install python and pip
 RUN apt-get update 
 RUN apt-get install -y python3-pip 

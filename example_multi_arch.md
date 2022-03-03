@@ -23,3 +23,10 @@ anthonyperniah/aws-glue-local-interpreter:manifest-latest \
 ```
 docker manifest push anthonyperniah/aws-glue-local-interpreter:manifest-latest
 ```
+
+
+docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+docker buildx create --name multiarch --driver docker-container --use
+docker buildx inspect --bootstrap
+
+docker buildx build --platform linux/amd64,linux/arm64 -t anthonyperniah/aws-glue-local-interpreter:latest --push .
