@@ -9,7 +9,8 @@ RUN ln -s /usr/bin/dpkg-split /usr/sbin/dpkg-split
 RUN ln -s /usr/bin/dpkg-deb /usr/sbin/dpkg-deb
 RUN ln -s /bin/tar /usr/sbin/tar
 ##install python and pip
-RUN apt-get update 
+RUN apt-get update
+RUN apt-get upgrade -y
 RUN apt-get install -y python3-pip 
 RUN apt-get install -y python3-dev 
 RUN apt-get install -y python3-venv
@@ -57,8 +58,10 @@ RUN cp /root/aws-glue-libs/jarsv1/* /root/spark-3.1.1-amzn-0-bin-3.2.1-amzn-3/ja
 RUN cd /root/spark-3.1.1-amzn-0-bin-3.2.1-amzn-3/jars/ && wget https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.2.0/hadoop-aws-3.2.0.jar
 
 ### requirements
+RUN python3 -m pip install --upgrade pip
 COPY requirements.txt /root/requirements.txt
 RUN pip3 install -r /root/requirements.txt
+RUN pip3 install --upgrade awscli
 #### setting notebook folder
 RUN mkdir /root/developments/
 WORKDIR /root/developments/
