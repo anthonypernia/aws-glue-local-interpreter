@@ -33,7 +33,7 @@ lxml
 pre-commit
 s3fs
 s3transfer
-virtualen
+virtualenv
 urllib3
 typing
 snowflake
