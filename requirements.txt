@@ -11,8 +11,6 @@ requests
 numpy
 matplotlib
 matplotlib-inline
-beautifulsoup4
-seaborn
 pymongo
 SQLAlchemy
 decorator
@@ -22,12 +20,7 @@ ipython
 pillow
 pyparsing
 python-dateutil
-scipy
-seaborn
-telegram
 datetime
-python-telegram-bot
-schedule
 apscheduler
 lxml
 pre-commit

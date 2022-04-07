@@ -1,11 +1,17 @@
 ## Local Docker container to develop in AWS glue
 
-With this container, you can run Python code and use **AWS Glue** context and AWS libraries. 
+With this container, you can run code and using **AWS** context and **AWS** libraries same as **AWS Glue**
+
 For example: 
 * Create DynamicFrame
 * Read and write in S3
 * Read tables in Athena
+* Use AWS Services.
 * Etc.
+
+##### Tested in architectures:
+- AMD64
+- ARM64 (Raspberry Pi 4)
 
  Docker image in DockerHub: [anthonyperniah/aws-glue-local-interpreter](https://hub.docker.com/r/anthonyperniah/aws-glue-local-interpreter)
 
@@ -23,15 +29,15 @@ Must be two files:
 * ***config*** 
 * ***credentials***
 
-*Examples*:
+*File Examples*:
 
-**config**
+**~/.aws/config**
 ```bash
 [default]
 region = us-east-1
 output = json
 ```
-**credentials**
+**~/.aws/credentials**
 ```bash
 aws_access_key_id = XXXXXXXXXXXXXXXXXXXXXXXX
 aws_secret_access_key = XXXXXXXXXXXXXXXXXXXXXXXX
@@ -86,6 +92,7 @@ When the container is running, go to :
 or
 - **{serverIP}**:8888
 
+And you should see a **Jupyter notebook** running.
 #### Accessing s3
 Create a notebook and run the code:
 ```python
@@ -97,9 +104,3 @@ glueContext = GlueContext(SparkContext.getOrCreate())
 inputDF = glueContext.create_dynamic_frame_from_options(connection_type = "s3", connection_options = {"paths": ["s3://awsglue-datasets/examples/us-legislators/all/memberships.json"]}, format = "json")
 inputDF.toDF().show()
 ```
-
-
-
-Tested in architectures:
-- AMD64
-- ARM64v8
