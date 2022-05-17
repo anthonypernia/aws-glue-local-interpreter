@@ -2,7 +2,7 @@ version: '3'
 
 services:
   aws-glue-local-interpreter:
-    image: "anthonyperniah/aws-glue-local-interpreter"
+    image: "anthonypernia/aws-glue-local-interpreter"
     volumes:
       - ~/.aws:/root/.aws
       - ~/aws-glue-developments:/root/developments ##(OPTIONAL)
