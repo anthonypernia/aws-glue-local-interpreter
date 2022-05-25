@@ -1,3 +1,4 @@
+<div>
 <div><h1>Local Docker container to develop in AWS glue</h1>
 
 <p>With this container, you can run Spark code with Python or Scala and use <b>AWS Glue</b> context and AWS libraries</p>
@@ -122,4 +123,5 @@ glueContext = GlueContext(SparkContext.getOrCreate())
 inputDF = glueContext.create_dynamic_frame_from_options(connection_type = "s3", connection_options = {"paths": ["s3://awsglue-datasets/examples/us-legislators/all/memberships.json"]}, format = "json")
 inputDF.toDF().show()
 </code></pre>
+</div>
 </div>
