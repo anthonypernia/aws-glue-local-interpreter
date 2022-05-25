@@ -1,4 +1,4 @@
-<h1>Local Docker container to develop in AWS glue</h1>
+<div><h1>Local Docker container to develop in AWS glue</h1>
 
 <p>With this container, you can run Spark code with Python or Scala and use <b>AWS Glue</b> context and AWS libraries</p>
 <p>For example, You can do the following:</p>
@@ -9,17 +9,19 @@
 <li>Use AWS Services</li>
 <li>Etc</li>
 </ul>
-
+</div>
+<div>
 <h5>Tested in:</h5>
 <ul>
 <li>AMD64</li>
 <li>ARM64</li>
 </ul>
-
-<h4>Docker image in DockerHub:</h4>
-<a href="https://hub.docker.com/r/anthonypernia/aws-glue-local-interpreter" rel="noreferrer"  target="_blank">aws-glue-local-interpreter</a>
-
-
+</div>
+<div>
+<h3>Docker image in DockerHub:
+<a href="https://hub.docker.com/r/anthonypernia/aws-glue-local-interpreter" rel="noreferrer"  target="_blank">aws-glue-local-interpreter</a></h3>
+</div>
+<div>
 <h3>Requirements:</h3>
 <ul>
 <li>Aws-cli
@@ -56,9 +58,9 @@ aws_secret_access_key = XXXXXXXXXXXXXXXXXXXXXXXX
 <pre><code>
 aws s3 ls
 </code></pre>
-
 <p>You should get a list of buckets in S3.</>
-
+</div>
+<div>
 <h2>How to use:</h2>
 <ul>
 <li>By bash command</li>
@@ -68,14 +70,16 @@ aws s3 ls
 <p>Both using:<p> 
 <a href="https://hub.docker.com/r/anthonyperniah/aws-glue-local-interpreter" rel="noreferrer"  target="_blank">anthonyperniah/aws-glue-local-interpreter</a>
 
-
+</div>
+<div>
 <h3>Bash command</h3>
 <pre><code>
 docker run  -p 8888:8888 -v ~/.aws:/root/.aws --name aws-glue-local-interpreter  anthonyperniah/aws-glue-local-interpreter
 </code></pre>
 
 <p>It will create the container was-glue-local-interpreter and a volume to share path <code> ~/.aws</code> in <code>/root/.aws</code> to use the same credentials</p>
-
+</div>
+<div>
 <h3>Docker-compose</h3>
 
 <p>Must have a file name:</p>
@@ -100,12 +104,15 @@ docker-compose up
 
 <p>You can add another volume where the script will be stored and edited locally and executed in the container. in this case, the folder "aws-glue-developments" is used.</p>
 
+
 <p>When the container is running, go to :</p>
 <li>http://localhost:8888/</li>
 or
 <li>{serverIP}:8888</li>
 </p>
 <p>And you should see a Jupyter notebook running.</p>
+</div>
+<div>
 <h3>Accessing to s3:</h3>
 <p>Create a notebook and run the code:</p>
 <pre><code>
@@ -115,3 +122,4 @@ glueContext = GlueContext(SparkContext.getOrCreate())
 inputDF = glueContext.create_dynamic_frame_from_options(connection_type = "s3", connection_options = {"paths": ["s3://awsglue-datasets/examples/us-legislators/all/memberships.json"]}, format = "json")
 inputDF.toDF().show()
 </code></pre>
+</div>
