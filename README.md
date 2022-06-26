@@ -17,6 +17,7 @@
 <li>AMD64</li>
 <li>ARM64</li>
 </ul>
+<p>Based on AWS official documentation <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-libraries.html#develop-local-python" rel="noreferrer"  target="_blank">Development local python</a></p>
 </div>
 <div>
 <h3>Docker image in DockerHub:
