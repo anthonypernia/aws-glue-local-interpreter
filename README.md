@@ -45,20 +45,17 @@
 <h3>Examples:</h3>
 
 <li><code>~/.aws/config</code></li>
-<pre><code>
-[default]
+<pre><code>[default]
 region = us-east-1
 output = json
 </code></pre>
 
 <li><code>~/.aws/credentials</code></li>
-<pre><code>
-aws_access_key_id = XXXXXXXXXXXXXXXXXXXXXXXX
+<pre><code>aws_access_key_id = XXXXXXXXXXXXXXXXXXXXXXXX
 aws_secret_access_key = XXXXXXXXXXXXXXXXXXXXXXXX
 </code></pre>
 <p>If you would like to check the access to S3:</p>
-<pre><code>
-aws s3 ls
+<pre><code>aws s3 ls
 </code></pre>
 <p>You should get a list of buckets in S3.</>
 </div>
@@ -75,8 +72,7 @@ aws s3 ls
 </div>
 <div>
 <h3>Bash command</h3>
-<pre><code>
-docker run  -p 8888:8888 -v ~/.aws:/root/.aws --name aws-glue-local-interpreter  anthonyperniah/aws-glue-local-interpreter
+<pre><code>docker run  -p 8888:8888 -v ~/.aws:/root/.aws --name aws-glue-local-interpreter  anthonyperniah/aws-glue-local-interpreter
 </code></pre>
 
 <p>It will create the container was-glue-local-interpreter and a volume to share path <code> ~/.aws</code> in <code>/root/.aws</code> to use the same credentials</p>
@@ -88,8 +84,7 @@ docker run  -p 8888:8888 -v ~/.aws:/root/.aws --name aws-glue-local-interpreter 
 <ul><li>docker-compose.yml</li></ul>
 
 <p>With this content</p>
-<pre><code>
-version: '3'
+<pre><code>version: '3'
 services:
   aws-glue-local-interpreter:
     image: "anthonyperniah/aws-glue-local-interpreter"
@@ -100,8 +95,7 @@ services:
       - "8888:8888"
 </code></pre>
 <p>Then, you need to use:</p>
-<pre><code>
-docker-compose up
+<pre><code>docker-compose up
 </code></pre>
 
 <p>You can add another volume where the script will be stored and edited locally and executed in the container. in this case, the folder "aws-glue-developments" is used.</p>
@@ -116,8 +110,7 @@ or
 <div>
 <h3>Accessing to s3:</h3>
 <p>Create a notebook and run the code:</p>
-<pre><code>
-from pyspark import SparkContext
+<pre><code>from pyspark import SparkContext
 from awsglue.context import GlueContext
 glueContext = GlueContext(SparkContext.getOrCreate()) 
 inputDF = glueContext.create_dynamic_frame_from_options(connection_type = "s3", connection_options = {"paths": ["s3://awsglue-datasets/examples/us-legislators/all/memberships.json"]}, format = "json")
