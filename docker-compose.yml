@@ -5,6 +5,6 @@ services:
     image: "anthonypernia/aws-glue-local-interpreter"
     volumes:
       - ~/.aws:/root/.aws
-      - ~/aws-glue-developments:/root/developments ##(OPTIONAL)
+      - ~/aws-glue-developments:/root/developments #(OPTIONAL)
     ports:
       - "8888:8888"
