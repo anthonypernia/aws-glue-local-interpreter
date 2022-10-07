@@ -12,7 +12,7 @@
 </ul>
 </div>
 <div>
-<h5>Tested in:</h5>
+<p>Tested in:</p>
 <ul>
 <li>AMD64</li>
 <li>ARM64</li>
@@ -24,7 +24,7 @@
 <a href="https://hub.docker.com/r/anthonypernia/aws-glue-local-interpreter" rel="noreferrer"  target="_blank">aws-glue-local-interpreter</a></h3>
 </div>
 <div>
-<h3>Requirements:</h3>
+<h2>Requirements:</h2>
 <ul>
 <li>Aws-cli
   <ul>
@@ -36,13 +36,13 @@
 <li>You must have AWS credentials in the path: <code>~/.aws</code> </li>
 </ul>
 
-<h4>There must be two files:</h4>
+<h3>There must be two files:</h3>
 <ul>
 <li>config</li>
 <li>credentials</li>
 </ul>
 
-<h5>Examples:</h5>
+<h3>Examples:</h3>
 
 <li><code>~/.aws/config</code></li>
 <pre><code>
@@ -105,7 +105,6 @@ docker-compose up
 </code></pre>
 
 <p>You can add another volume where the script will be stored and edited locally and executed in the container. in this case, the folder "aws-glue-developments" is used.</p>
-
 
 <p>When the container is running, go to :</p>
 <li>http://localhost:8888/</li>
