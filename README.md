@@ -146,18 +146,9 @@ glueContext: GlueContext = get_gluecontext()
 sparkContext: SparkContext = get_spark_context()
 sqlContext: SQLContext = get_spark_sql_context(sparkContext)
 </code></pre>
-<figure>
 <img src="https://github.com/anthonypernia/aws-glue-local-interpreter/blob/main/assets/gluecontext.png?raw=true" alt="GlueContext">
-<figcaption>GlueContext</figcaption>
-</figure>
-<figure>
 <img src="https://github.com/anthonypernia/aws-glue-local-interpreter/blob/main/assets/sparkcontext.png?raw=true" alt="SparkContext">
-<figcaption>SparkContext</figcaption>
-</figure>
-<figure>
 <img src="https://github.com/anthonypernia/aws-glue-local-interpreter/blob/main/assets/sparksqlcontext.png?raw=true" alt="SparkSQLContext">
-<figcaption>SparkSQLContext</figcaption>
-</figure>
 <h3>Creating DynamicFrame and DataFrame</h3>
 <p>After creating the contexts:</p>
 <pre><code>from awsglue.dynamicframe import DynamicFrame
@@ -195,14 +186,8 @@ df: DynamicFrame = create_df_from_path(glueContext, path, format_file)
 </code><code>
 spark_df: DataFrame = create_spark_df_from_path(sqlContext, path, format_file)
 </code></pre>
-<figure>
 <img src="https://github.com/anthonypernia/aws-glue-local-interpreter/blob/main/assets/dynamicframe.png?raw=true" alt="DynamicFrame">
-<figcaption>DynamicFrame</figcaption>
-</figure>
-<figure>
 <img src="https://github.com/anthonypernia/aws-glue-local-interpreter/blob/main/assets/dataframe.png?raw=true" alt="DataFrame">
-<figcaption>DataFrame</figcaption>
-</figure>
 <h3>Write data in S3</h3>
 <pre><code>def write_spark_df(df: DataFrame, bucket: str, key: str) -> None:
     """Write a dataframe to S3 in parquet format
@@ -218,9 +203,6 @@ bucket: str = "example-bucket-demo-aws"
 key: str = "test-folder-output"
 write_spark_df(spark_df, bucket, key)
 </code></pre>
-<figure>
 <img src="https://github.com/anthonypernia/aws-glue-local-interpreter/blob/main/assets/aws.png?raw=true" alt="AWS console - data that was written">
-<figcaption>AWS console - data that was written</figcaption>
-</figure>
 </div>
 </div>
