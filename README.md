@@ -108,13 +108,14 @@ or
 <p>And you should see a Jupyter notebook running.</p>
 </div>
 <div>
-<h3>Creating GlueContext</h3>
+<h3>Creating GlueContext and SparkContext</h3>
 <p>Create a notebook and run the code:</p>
 <pre><code>from pyspark import SparkContext
 from awsglue.context import GlueContext
+from pyspark.sql import SQLContext
 </code>
 <code>
-def get_context() -> GlueContext:
+def get_gluecontext() -> GlueContext:
     """Get the glue context
     Returns:
         GlueContext: Glue context
@@ -123,7 +124,80 @@ def get_context() -> GlueContext:
     return GlueContext(sc)
 </code>
 <code>
-glueContext: GlueContext = get_context()
+def get_spark_context() -> SparkContext:
+    """Get the spark context
+    Returns:
+        SparkContext: Spark context
+    """    
+    return SparkContext.getOrCreate()
+</code>
+<code>
+def get_spark_sql_context(sparkContext: SparkContext) -> SQLContext:
+    """Get the spark sql context
+    Args:
+        sparkContext (SparkContext): Spark context
+    Returns:
+        SQLContext: Spark sql context
+    """    
+    return SQLContext(sparkContext)
+</code>
+<code>
+glueContext: GlueContext = get_gluecontext()
+sparkContext: SparkContext = get_spark_context()
+sqlContext: SQLContext = get_spark_sql_context(sparkContext)
+</code></pre>
+<img></img>
+<h3>Creating DynamicFrame and DataFrame</h3>
+<p>After creating the contexts:</p>
+<pre><code>from awsglue.dynamicframe import DynamicFrame
+</code>
+<code>
+def create_df_from_path(glueContext: GlueContext, path: str, format_file: str) -> DynamicFrame:
+    """Create a dataframe from a path
+    Args:
+        glueContext (GlueContext): Glue context
+        path (str): Path to read
+        format_file (str): Format of the file
+    Returns:
+        DynamicFrame: DynamicFrame
+    """    
+    return glueContext.create_dynamic_frame_from_options(connection_type = "s3", connection_options = {"paths": [path]}, format = format_file)
+</code>
+<code>
+def create_spark_df_from_path(sqlContext: SQLContext, path: str, format_file: str) -> DataFrame:
+    """Create a spark dataframe from a path
+    Args:
+        sqlContext (SQLContext): Spark sql context
+        path (str): Path to read
+        format_file (str): Format of the file
+    Returns:
+        DataFrame: Spark dataframe
+    """    
+    return sqlContext.read.format(format_file).load(path)
+</code>
+<code>
+path: str = "s3://awsglue-datasets/examples/us-legislators/all/memberships.json"
+format_file: str = "json"
+</code><code>
+df: DynamicFrame = create_df_from_path(glueContext, path, format_file)
+</code><code>
+spark_df: DataFrame = create_spark_df_from_path(sqlContext, path, format_file)
+</code></pre>
+<img></img>
+<h3>Write data in S3</h3>
+<pre><code>def write_spark_df(df: DataFrame, bucket: str, key: str) -> None:
+    """Write a dataframe to S3 in parquet format
+    Args:
+        df (DataFrame): Dataframe to write
+        bucket (str): S3 bucket
+        key (str): S3 key
+    """    
+    df.write.parquet(f"s3://{bucket}/{key}", mode="overwrite")
+</code>
+<code>
+bucket: str = "example-bucket-demo-aws"
+key: str = "test-folder-output"
+write_spark_df(spark_df, bucket, key)
 </code></pre>
 </div>
 </div>
