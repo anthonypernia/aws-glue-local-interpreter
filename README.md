@@ -150,6 +150,7 @@ sqlContext: SQLContext = get_spark_sql_context(sparkContext)
 <h3>Creating DynamicFrame and DataFrame</h3>
 <p>After creating the contexts:</p>
 <pre><code>from awsglue.dynamicframe import DynamicFrame
+from pyspark.sql import DataFrame
 </code>
 <code>
 def create_df_from_path(glueContext: GlueContext, path: str, format_file: str) -> DynamicFrame:
