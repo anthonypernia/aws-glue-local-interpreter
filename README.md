@@ -67,12 +67,12 @@ aws_secret_access_key = XXXXXXXXXXXXXXXXXXXXXXXX
 </ul>
 
 <p>Both using:<p> 
-<a href="https://hub.docker.com/r/anthonyperniah/aws-glue-local-interpreter" rel="noreferrer"  target="_blank">anthonyperniah/aws-glue-local-interpreter</a>
+<a href="https://hub.docker.com/r/anthonypernia/aws-glue-local-interpreter" rel="noreferrer"  target="_blank">anthonypernia/aws-glue-local-interpreter</a>
 
 </div>
 <div>
 <h3>Bash command</h3>
-<pre><code>docker run  -p 8888:8888 -v ~/.aws:/root/.aws --name aws-glue-local-interpreter  anthonyperniah/aws-glue-local-interpreter
+<pre><code>docker run  -p 8888:8888 -v ~/.aws:/root/.aws --name aws-glue-local-interpreter  anthonypernia/aws-glue-local-interpreter
 </code></pre>
 
 <p>It will create the container was-glue-local-interpreter and a volume to share path <code> ~/.aws</code> in <code>/root/.aws</code> to use the same credentials</p>
@@ -87,7 +87,7 @@ aws_secret_access_key = XXXXXXXXXXXXXXXXXXXXXXXX
 <pre><code>version: '3'
 services:
   aws-glue-local-interpreter:
-    image: "anthonyperniah/aws-glue-local-interpreter"
+    image: "anthonypernia/aws-glue-local-interpreter"
     volumes:
       - ~/.aws:/root/.aws
       - ~/aws-glue-developments:/root/developments ##(OPTIONAL)
@@ -108,13 +108,22 @@ or
 <p>And you should see a Jupyter notebook running.</p>
 </div>
 <div>
-<h3>Accessing to s3:</h3>
+<h3>Creating GlueContext</h3>
 <p>Create a notebook and run the code:</p>
 <pre><code>from pyspark import SparkContext
 from awsglue.context import GlueContext
-glueContext = GlueContext(SparkContext.getOrCreate()) 
-inputDF = glueContext.create_dynamic_frame_from_options(connection_type = "s3", connection_options = {"paths": ["s3://awsglue-datasets/examples/us-legislators/all/memberships.json"]}, format = "json")
-inputDF.toDF().show()
+</code>
+<code>
+def get_context() -> GlueContext:
+    """Get the glue context
+    Returns:
+        GlueContext: Glue context
+    """    
+    sc = SparkContext.getOrCreate()
+    return GlueContext(sc)
+</code>
+<code>
+glueContext: GlueContext = get_context()
 </code></pre>
 </div>
 </div>
