@@ -108,6 +108,11 @@ or
 <p>And you should see a Jupyter notebook running.</p>
 </div>
 <div>
+<h3>Using VSCODE to develop with Containers</h3>
+<p>Using the VSCODE  <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack" rel="noreferrer"  target="_blank">Remote Development</a> extension, we could launch VScode inside the container</p>
+<img src="https://github.com/anthonypernia/aws-glue-local-interpreter/blob/main/assets/remote-dev.png?raw=true" alt="GlueContext">
+</div>
+<div>
 <h3>Creating GlueContext and SparkContext</h3>
 <p>Create a notebook and run the code:</p>
 <pre><code>from pyspark import SparkContext
