@@ -72,7 +72,7 @@ aws_secret_access_key = XXXXXXXXXXXXXXXXXXXXXXXX
 </div>
 <div>
 <h3>Bash command</h3>
-<pre><code>docker run  -p 8888:8888 -v ~/.aws:/root/.aws --name aws-glue-local-interpreter  anthonypernia/aws-glue-local-interpreter
+<pre><code>docker run  -p 8888:8888 -v ~/.aws:/root/.aws:ro --name aws-glue-local-interpreter  anthonypernia/aws-glue-local-interpreter
 </code></pre>
 
 <p>It will create the container was-glue-local-interpreter and a volume to share path <code> ~/.aws</code> in <code>/root/.aws</code> to use the same credentials</p>
