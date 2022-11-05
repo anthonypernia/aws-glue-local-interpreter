@@ -5,14 +5,9 @@ pyspark
 boto3
 moto
 numpy
-matplotlib
-matplotlib-inline
 SQLAlchemy
 ipykernel
 ipython
 virtualenv
 py4j
-nbclient
-nbconvert
-nbformat
 notebook

@@ -1,6 +1,6 @@
 <div>
 <div><h1>Local Docker container to develop in AWS glue</h1>
-
+<p>This container was created due to problems with the official image to run on ARM environments like Raspberry Pi and MacBook with M1</p>
 <p>With this container, you can run Spark code with Python or Scala and use <b>AWS Glue</b> context and AWS libraries</p>
 <p>For example, You can do the following:</p>
 <ul>

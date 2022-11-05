@@ -4,3 +4,9 @@
 .gitattributes
 README.md
 assets
+dockerfile_old
+*.xlsx
+*.png
+venv
+.venv
+.git
