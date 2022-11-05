@@ -51,3 +51,4 @@ ENV PYTHONPATH=/opt/spark/python/lib/awsglue.zip:/opt/spark/python/lib/pyspark.z
 RUN mkdir developments
 WORKDIR /root/developments/
 CMD [ "jupyter-notebook", "--ip", "*", "--allow-root", "--no-browser", "--NotebookApp.token=''", "--NotebookApp.password=''", "--NotebookApp.port=8888" ]
+#CMD [ "bash" ]
